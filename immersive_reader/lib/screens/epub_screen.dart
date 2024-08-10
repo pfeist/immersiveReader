@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:epubx/epubx.dart';
 import 'chapter_screen.dart';
@@ -6,7 +8,7 @@ import 'dart:io';  // Import dart:io for File operations
 class EpubScreen extends StatefulWidget {
   final String path;
 
-  EpubScreen({required this.path});
+  const EpubScreen({super.key, required this.path});
 
   @override
   _EpubScreenState createState() => _EpubScreenState();
@@ -24,7 +26,7 @@ class _EpubScreenState extends State<EpubScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('EPUB Reader')),
+      appBar: AppBar(title: const Text('EPUB Reader')),
       body: FutureBuilder<EpubBook>(
         future: _futureBook,
         builder: (context, snapshot) {
@@ -32,10 +34,10 @@ class _EpubScreenState extends State<EpubScreen> {
             if (snapshot.hasData) {
               return _buildEpubContent(snapshot.data!);
             } else {
-              return Center(child: Text('Error loading EPUB'));
+              return const Center(child: Text('Error loading EPUB'));
             }
           } else {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
         },
       ),

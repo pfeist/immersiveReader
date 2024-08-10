@@ -2,14 +2,14 @@
 
 import 'package:flutter/material.dart';
 
-final Color primaryColor = Colors.blue;
-final Color accentColor = Colors.amber;
+const Color primaryColor = Colors.blue;
+const Color accentColor = Colors.amber;
 
-final TextStyle headlineStyle = TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold);
-final TextStyle bodyTextStyle = TextStyle(fontSize: 16.0);
+const TextStyle headlineStyle = TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold);
+const TextStyle bodyTextStyle = TextStyle(fontSize: 16.0, color: Colors.white);  // Set text color here
 
 final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
-  backgroundColor: primaryColor,  // Use backgroundColor instead of primary
-  padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-  textStyle: TextStyle(fontSize: 18.0),
+  backgroundColor: primaryColor,  // Set button background color
+  padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+  textStyle: const TextStyle(fontSize: 18.0),
 );
