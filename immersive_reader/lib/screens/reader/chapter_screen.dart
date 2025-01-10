@@ -54,7 +54,7 @@ void _paginateText(String text) {
 
     if (tp.height > maxHeight) {
       String lastWord = words[i];
-      pageBuffer.write(lastWord);
+      //pageBuffer.write(lastWord);
       pages.add(pageBuffer.toString().trim());
 
       pageBuffer.clear();

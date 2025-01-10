@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:immersive_reader/styles/styles.dart';  // Import the styles
 import 'package:file_picker/file_picker.dart'; 
-import 'package:immersive_reader/screens/epub_screen.dart';
+import 'package:immersive_reader/screens/reader/epub_screen.dart';
 
 
 class HomeScreen extends StatelessWidget {
