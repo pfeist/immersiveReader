@@ -1,9 +1,7 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'package:flutter/material.dart';
 import 'package:epubx/epubx.dart';
-import 'chapter_screen.dart';
-import 'dart:io';  // Import dart:io for File operations
+import 'dart:io';  
+import 'package:immersive_reader/screens/reader/reader_screen.dart';
 
 class EpubScreen extends StatefulWidget {
   final String path;
@@ -32,7 +30,24 @@ class _EpubScreenState extends State<EpubScreen> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
-              return _buildEpubContent(snapshot.data!);
+              // If we successfully loaded the EPUB, show a button
+              // to open ReaderScreen (continuous reading)
+              return Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Navigate to continuous ReaderScreen with the file path
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ReaderScreen(
+                          filePath: widget.path,
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Text('Open Entire Book'),
+                ),
+              );
             } else {
               return const Center(child: Text('Error loading EPUB'));
             }
@@ -44,30 +59,8 @@ class _EpubScreenState extends State<EpubScreen> {
     );
   }
 
-  Widget _buildEpubContent(EpubBook book) {
-    final chapters = book.Chapters;
-
-    return ListView.builder(
-      itemCount: chapters!.length,
-      itemBuilder: (context, index) {
-        final chapter = chapters[index];
-        return ListTile(
-          title: Text(chapter.Title!),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ChapterScreen(chapter: chapter),
-              ),
-            );
-          },
-        );
-      },
-    );
-  }
-
   Future<EpubBook> _openEpub(String path) async {
-    final epubBytes = await File(path).readAsBytes();  // Ensure File is correctly used here
+    final epubBytes = await File(path).readAsBytes();
     final epubBook = await EpubReader.readBook(epubBytes);
     return epubBook;
   }
